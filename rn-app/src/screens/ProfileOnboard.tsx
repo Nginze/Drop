@@ -1,7 +1,7 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -10,14 +10,16 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { AuthContext } from "../contexts/AuthContext";
 import CameraOptions from "../modals/CameraOptions";
 import { apiClient } from "../services/ApiClient";
 
 interface IProps {}
 
 const ProfileOnboard: React.FC<IProps> = () => {
-  const route = useRoute<RouteProp<RootStackParamList, "profileOnboard">>();
-  const { accountData } = route.params;
+  // const route = useRoute<RouteProp<RootStackParamList, "profileOnboard">>();
+  // const { accountData } = route.params;
+  const { userData } = useContext(AuthContext);
   const [isLoading, setLoading] = useState<Boolean>(false);
   const hasPhoto = false;
   const hasletterRequirement = false;
@@ -28,7 +30,6 @@ const ProfileOnboard: React.FC<IProps> = () => {
   const [usernameIsAvailble, setAvailablity] = useState<Boolean>(false);
   const [hasRequiredLength, setHasRequiredLength] = useState<Boolean>(false);
   const [hasRequiredFormat, setHasRequiredFormat] = useState<Boolean>(false);
-  useEffect(() => console.log(accountData), []);
   const onboardProfile = async () => {
     setLoading(true);
     try {
@@ -37,13 +38,13 @@ const ProfileOnboard: React.FC<IProps> = () => {
         {
           profileUsername,
           profilePhoto,
-          user_id: accountData.user_id,
+          user_id: userData?.user_id,
         }
       );
       setLoading(false);
       console.log("sign in data", data);
       if (status === 200) {
-        navigation.navigate("interestOnboard", { accountData });
+        navigation.navigate("interestOnboard");
       }
     } catch (err) {
       console.log(err);

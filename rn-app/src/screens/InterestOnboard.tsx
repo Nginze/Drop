@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import InterestSelect from "../components/InterestSelect";
 import interestOptions from "../constants/InterestOptions";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,20 +14,22 @@ import SelectGrid from "../components/SelectGrid";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { useSelectedInterests } from "../store/useSelectedInterests";
 import { apiClient } from "../services/ApiClient";
+import { AuthContext } from "../contexts/AuthContext";
 
 type Props = {};
 
 const InterestOnboard = (props: Props) => {
-  const route = useRoute<RouteProp<RootStackParamList, "interestOnboard">>();
-  const {
-    accountData: { user_id },
-  } = route.params;
+  // const route = useRoute<RouteProp<RootStackParamList, "interestOnboard">>();
+  // const {
+  //   accountData: { user_id },
+  // } = route.params;
+  const {userData} = useContext(AuthContext)
   const [isLoading, setLoading] = useState<Boolean>(false);
   const navigation = useNavigation<any>();
   const selectedInterests = useSelectedInterests(
     state => state.selectedInterests
   );
-  const formattedInterests = selectedInterests.map(item => [user_id, item]);
+  const formattedInterests = selectedInterests.map(item => [userData?.user_id, item]);
   const onboardInterests = async () => {
     setLoading(true);
     try {

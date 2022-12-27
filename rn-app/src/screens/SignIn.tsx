@@ -6,13 +6,16 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useFonts } from "expo-font";
 import Divider from "react-native-divider";
 import useKeyboardVisible from "../hooks/useKeyboardVisible";
 import { useNavigation } from "@react-navigation/native";
 import { apiClient } from "../services/ApiClient";
+import { storeData } from "../utils/Credentials";
+import { AuthContext } from "../contexts/AuthContext";
+
 export interface IProps {}
 
 const ReducedHeader: React.FC<any> = () => {
@@ -28,6 +31,7 @@ const ReducedHeader: React.FC<any> = () => {
   );
 };
 const SignIn: React.FC<IProps> = () => {
+  const {userData} = useContext(AuthContext)
   const isKeyboardVisible = useKeyboardVisible();
   const [isLoading, setLoading] = useState<Boolean>(false);
   const [emailAddress, setEmailAddress] = useState<string | undefined>("");
@@ -47,7 +51,8 @@ const SignIn: React.FC<IProps> = () => {
       setLoading(false);
       console.log("sign in data", accountData);
       if (status === 200) {
-        // navigation.navigate("profileOnboard", { accountData });
+        storeData(accountData)
+        navigation.navigate("profileOnboard");
       }
     } catch (err) {
       console.log(err);

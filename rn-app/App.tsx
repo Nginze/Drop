@@ -16,6 +16,9 @@ import PublicStack from "./src/navigation/PublicStack";
 import PrivateStack from "./src/navigation/PrivateStack";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CameraOptions from "./src/modals/CameraOptions";
+import { AuthContext, AuthProvider } from "./src/contexts/AuthContext";
+import { useContext } from "react";
+import Navigator from "./src/navigation/Navigator";
 const Tab = createBottomTabNavigator();
 export default function App() {
   const [fontloaded] = useFonts({
@@ -31,12 +34,13 @@ export default function App() {
   //   user_id: "kjaldfjalsdjk",
   //   email_address: "jacksmail@hotmail.com",
   // };
-  const user = null
+
   return (
     <>
-      <NavigationContainer>
-        {user ? <PrivateStack /> : <PublicStack />}
-        {/* <RootStack.Navigator
+      <AuthProvider>
+        <NavigationContainer>
+          <Navigator/>
+          {/* <RootStack.Navigator
           screenOptions={{
             headerShown: false,
             cardStyle: {
@@ -75,8 +79,8 @@ export default function App() {
             /> 
           </RootStack.Group>
         </RootStack.Navigator> */}
-      </NavigationContainer>
-
+        </NavigationContainer>
+      </AuthProvider>
       <StatusBar style="auto" />
     </>
   );
