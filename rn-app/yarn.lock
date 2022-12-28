@@ -1860,6 +1860,11 @@
   resolved "https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.24.51.tgz"
   integrity sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA==
 
+"@th3rdwave/react-navigation-bottom-sheet@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@th3rdwave/react-navigation-bottom-sheet/-/react-navigation-bottom-sheet-0.2.2.tgz#5b3f4221f12af79d7356ace9e4944e74c809c6a0"
+  integrity sha512-PLTFAapEtZw19zkj/A3aa+x/bsCXz8cVCGbW4DmjgHIYHh6lw2SQz1JAUqMjNQbXUBM5unUuSdMT+WkmaqVO8w==
+
 "@types/hammerjs@^2.0.36":
   version "2.0.41"
   resolved "https://registry.npmjs.org/@types/hammerjs/-/hammerjs-2.0.41.tgz"

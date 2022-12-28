@@ -2,7 +2,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import TabNav from "./src/navigation/TabNav";
 import Home from "./src/screens/Home";
 import InterestOnboard from "./src/screens/InterestOnboard";
@@ -24,12 +24,13 @@ export default function App() {
   const [fontloaded] = useFonts({
     "primary-font": require("./src/assests/fonts/Poppins-Regular.ttf"),
     "logo-font": require("./src/assests/fonts/IndieFlower-Regular.ttf"),
+    "primary-font-bold": require("./src/assests/fonts/Poppins-Bold.ttf"),
+    "primary-font-semibold": require("./src/assests/fonts/Poppins-SemiBold.ttf"),
   });
   if (!fontloaded) {
     return null;
   }
   const RootStack = createStackNavigator<RootStackParamList>();
-
   // const user = {
   //   user_id: "kjaldfjalsdjk",
   //   email_address: "jacksmail@hotmail.com",
@@ -39,7 +40,7 @@ export default function App() {
     <>
       <AuthProvider>
         <NavigationContainer>
-          <Navigator/>
+          <Navigator />
           {/* <RootStack.Navigator
           screenOptions={{
             headerShown: false,

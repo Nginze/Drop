@@ -13,6 +13,7 @@ import {
 import { AuthContext } from "../contexts/AuthContext";
 import CameraOptions from "../modals/CameraOptions";
 import { apiClient } from "../services/ApiClient";
+import { storeData } from "../utils/Credentials";
 
 interface IProps {}
 
@@ -33,7 +34,7 @@ const ProfileOnboard: React.FC<IProps> = () => {
   const onboardProfile = async () => {
     setLoading(true);
     try {
-      const { data, status } = await apiClient.post(
+      const { data: accountData, status } = await apiClient.post(
         "/createaccount/profileonboard/",
         {
           profileUsername,
@@ -42,8 +43,9 @@ const ProfileOnboard: React.FC<IProps> = () => {
         }
       );
       setLoading(false);
-      console.log("sign in data", data);
+      console.log("profileonboard", accountData);
       if (status === 200) {
+        await storeData(accountData)
         navigation.navigate("interestOnboard");
       }
     } catch (err) {
@@ -149,7 +151,7 @@ const ProfileOnboard: React.FC<IProps> = () => {
               <Text className="font-bold">
                 {profileUsername ? profileUsername : "username"}
               </Text>
-              <Text>username@gmail.com</Text>
+              <Text>{userData?.email_address}</Text>
             </View>
           </View>
           <View>

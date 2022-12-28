@@ -31,7 +31,7 @@ const ReducedHeader: React.FC<any> = () => {
   );
 };
 const SignIn: React.FC<IProps> = () => {
-  const {userData} = useContext(AuthContext)
+  const { userData, setToggle, actionToggle } = useContext(AuthContext);
   const isKeyboardVisible = useKeyboardVisible();
   const [isLoading, setLoading] = useState<Boolean>(false);
   const [emailAddress, setEmailAddress] = useState<string | undefined>("");
@@ -49,10 +49,10 @@ const SignIn: React.FC<IProps> = () => {
         }
       );
       setLoading(false);
-      console.log("sign in data", accountData);
       if (status === 200) {
-        storeData(accountData)
-        navigation.navigate("profileOnboard");
+        await storeData(accountData);
+        setToggle(!actionToggle);
+        // navigation.navigate(userData?.username ? "tabNav" : "profileOnboard");
       }
     } catch (err) {
       console.log(err);
@@ -107,7 +107,12 @@ const SignIn: React.FC<IProps> = () => {
             )}
           </TouchableOpacity>
           <Divider orientation="center">or</Divider>
-          <TouchableOpacity onPress={() => checkAuthStatus()}>
+          <TouchableOpacity
+            onPress={() => {
+              checkAuthStatus();
+              navigation.navigate('login')
+            }}
+          >
             <Text className="text-center">Have an account? Login</Text>
           </TouchableOpacity>
         </View>

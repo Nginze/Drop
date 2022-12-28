@@ -18,3 +18,11 @@ export const getData = async (): Promise<userData | undefined> => {
     console.log(err);
   }
 };
+
+export const removeData = async () => {
+  try {
+    await AsyncStorage.removeItem("@userData");
+  } catch (err) {
+    console.log(err);
+  }
+};

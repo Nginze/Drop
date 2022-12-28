@@ -2,6 +2,8 @@ import { View, Text, FlatList, SafeAreaView } from "react-native";
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Roomcard from "../components/Roomcard";
+import RoomSheet from "../modals/RoomSheet";
+import CameraOptions from "../modals/CameraOptions";
 
 interface IProps {}
 const Data = [{}, {}, {}, {}, {}, {}, {}, {}];

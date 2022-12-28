@@ -8,7 +8,7 @@ module.exports = {
       white: "#fff",
       "button-primary": "#2563eb",
       "text-primary": "#151415",
-      "text-light": "#374151",
+      "text-light": "#94a3b8",
       "box-bg": "#F1F6F9",
       "button-secondary": "#fbbf24"
     },
